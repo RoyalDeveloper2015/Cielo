@@ -1,0 +1,177 @@
+div.layout-padding#cadOng(layout="column" layout-align="center center")
+  h1 Cadastro ONGs
+  .container(layout = "row" )
+    div#form(flex="100")
+      div(layout="column" flex="100")
+        form(name="ongForm" layout="column" ng-submit="$ctrl.addOng($ctrl.ongForm, $event)")
+          div(layout="column"  flex="100" )
+            h2 Informações Básicas
+            div#CadBasico(layout="column" layout-gt-sm="row"  flex="100")
+              md-input-container.md-block.md-icon-float(flex-gt-sm="30" flex="100")
+                md-icon
+                  i.fa.fa-user  
+                label Nome Fantasia
+                input(ng-model="$ctrl.ongForm.nomeFantasia" required)         
+              md-input-container.md-block(flex)
+                label Razão Social
+                input(ng-model="$ctrl.ongForm.razaoSocial" required)
+              md-input-container.md-block(flex-gt-sm="15" flex="100")
+                label CNPJ
+                input(ng-model="$ctrl.ongForm.cnpj" ui-br-cnpj-mask required)
+              md-input-container.md-block(flex-gt-sm="10" flex="100")
+                label Ano Fundação
+                input(ng-model="$ctrl.ongForm.anoFundacao" required ng-pattern="/^[0-9]{4}$/" md-maxlength="4")          
+            h2 Contato
+            div#CadContatos(layout="column" layout-gt-sm="row"  flex="100")    
+              md-input-container.md-block(flex-gt-sm="15" flex="100")
+                md-icon
+                  i.fa.fa-phone   
+                input(type="text" ng-model="$ctrl.ongForm.telefone"  placeholder="Telefone" ui-br-phone-number ng-required="true")  
+              md-input-container.md-block(md-no-float flex-gt-sm="30" flex="100")
+                md-icon
+                  i.fa.fa-envelope   
+                input(type="email" ng-model="$ctrl.ongForm.email" placeholder="Email" required)
+              md-input-container.md-block(md-no-float flex-gt-sm="30" flex="100")
+                md-icon
+                  i.fa.fa-globe                     
+                input( ng-model="$ctrl.ongForm.urlSite" placeholder="Site" required) 
+              md-input-container.md-block(flex-gt-sm="25" flex="100")
+                label Slug 
+                input(ng-model="$ctrl.ongForm.slug" required)
+            h2 Endereço                             
+            div#Endereco(layout="column" layout-gt-sm="row"  flex="100")   
+              md-input-container.md-block.md-icon-float(flex-gt-sm="10" flex="100")
+                md-icon
+                  i.fa.fa-search  
+                label Cep
+                input(ng-model="$ctrl.ongForm.cep" ui-br-cep-mask ng-blur="$ctrl.buscaEnd($ctrl.ongForm.cep)" required)          
+              md-input-container.md-block(flex)
+                md-icon
+                  i.fa.fa-road   
+                label Logradouro
+                input(type = "text" ng-model="$ctrl.ongForm.logradouro" required blocked) 
+                md-icon
+                  i.fa.fa-map-marker  
+              md-input-container.md-block(flex-gt-sm="10" flex="100")
+                label num
+                input(ng-model="$ctrl.ongForm.num" required) 
+                md-icon
+                  i.fa.fa-map-marker        
+              md-input-container.md-block(flex-gt-sm="20" flex="100")
+                label Cidade 
+                input(ng-model="$ctrl.ongForm.cidade" required)   
+              md-input-container.md-block(flex-gt-sm="10" flex="100")
+                label Estado
+                input(ng-model="$ctrl.ongForm.estado" ng-value="{{state.Sigla}}") 
+            h2 Imagens     
+            div#Imagens(layout="column" flex="100")
+              div(flex="100" layout="row" layout-align="center center")
+                md-input-container.md-block(flex)
+                  label Logo
+                  input(ng-model="$ctrl.ongForm.logo" required)
+                md-button.md-icon-button(ng-click="$ctrl.handleUploadImage('logo', $event)" aria-label="carrega imagem")
+                  md-icon
+                    i.fa.fa-cloud-upload 
+                img.FormImage(ng-show="$ctrl.ongForm.logo" ng-src="{{$ctrl.ongForm.logo}}")
+              div(flex="100" layout="row" layout-align="center center")        
+                md-input-container.md-block(flex)
+                  label Imagem de Fundo
+                  input(ng-model="$ctrl.ongForm.backgroundImage" required)
+                md-button.md-icon-button(ng-click="$ctrl.handleUploadImage('backgroundImage', $event)" aria-label="carrega imagem")
+                    md-icon
+                      i.fa.fa-cloud-upload 
+                img.FormImage(ng-show="$ctrl.ongForm.backgroundImage" ng-src="{{$ctrl.ongForm.backgroundImage}}") 
+              div(flex="100" layout="row" layout-align="center center")                                   
+                label Imagens da ONG
+                md-list(flex)
+                  md-list-item.md-1-line(flex ng-repeat="image in $ctrl.ongForm.imagens")
+                    input(flex ng-model="image.imagem" required disabled)
+                    img.FormImage(ng-show="image.imagem" ng-src="{{image.imagem}}")  
+                md-button.md-icon-button(ng-click="$ctrl.handleUploadImage('imagens', $event)" aria-label="carrega imagem")
+                  md-icon
+                    i.fa.fa-plus      
+            h2 Infos      
+            div#Infos(layout="column" layout-gt-sm="row"  flex="100")
+              md-input-container.md-block(flex-gt-sm="20"  flex="100")
+                label Causa
+                md-select(ng-model="$ctrl.ongForm.causa" )  
+                  md-option(ng-repeat="area in $ctrl.listAreasDeAtuacao" value="{{area.abbrev}}") {{area.desc}}
+              md-input-container.md-block(flex-gt-sm="20"  flex="100")
+                label Causa - FrontEnd
+                md-select(ng-model="$ctrl.ongForm.causaFrontEnd" )  
+                  md-option(ng-repeat="area in $ctrl.listAreasDeAtuacao" value="{{area.desc}}") {{area.desc}}                  
+              md-input-container.md-block(flex)
+                  label Locais de Atuação
+                  input(ng-model="$ctrl.ongForm.localidadesDeAtuacao.localidade" required)
+            h2 Nossas Análises                    
+            div#Analises(layout="column" flex="100")
+                md-input-container.md-block(flex-gt-sm)
+                  label Pequena Descrição 
+                  textarea(ng-model="$ctrl.ongForm.desc" columns="1" md-maxlength="140")            
+                md-input-container.md-block(flex-gt-sm)
+                  label Sobre a ONG
+                  textarea(ng-model="$ctrl.ongForm.sobre" columns="1")
+                md-input-container.md-block(flex-gt-sm)
+                  label Gestão
+                  textarea(ng-model="$ctrl.ongForm.analiseGestao" columns="1")
+                md-input-container.md-block(flex-gt-sm)
+                  label Transparência
+                  textarea(ng-model="$ctrl.ongForm.analiseTransparencia" columns="1")    
+                md-input-container.md-block(flex-gt-sm)
+                  label Impacto
+                  textarea(ng-model="$ctrl.ongForm.analiseImpacto" columns="1")
+                div(flex="100" layout="row" layout-align="center center")         
+                  md-input-container.md-block(flex)
+                    label PDF
+                    input(ng-model="$ctrl.ongForm.linkPdf" required)
+                  md-button.md-icon-button(ng-click="$ctrl.handleUploadImage('PDF', $event)" aria-label="carrega imagem")
+                      md-icon
+                        i.fa.fa-cloud-upload   
+          div(flex="10")         
+            md-button.md-raized.md-primary(type="submit") Cadastrar
+
+script(type="text/ng-template" id="selectImage.tmpl.pug")
+  md-dialog(aria-label="Search Images")
+    form(ng-cloak)
+      md-toolbar
+        div.md-toolbar-tools
+          h2 Load a new one image
+          span(flex)
+          md-button.md-icon-button(ng-click="cancel()") x
+      md-dialog-content
+        md-content
+          div#uploadImage(flex="100", layout="column")
+          h1 New Image ?
+          div#imageForm(flex layout="column")
+            md-input-container(flex = "40").md-padding
+            div#drop(flex="30" layout="row").md-padding
+              div.drop-box(ngf-drop="$ctrl.onFileSelect($file)" ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-pattern="'image/*,application/pdf'" ngf-resize="{ratio: '1.91:1', width: 1203, height: 630}")
+                span Drop Images or PDFs files here
+              div( ngf-no-file-drop) File Drag/Drop is not supported for this browser
+            div#select 
+              input(type="file" ngf-select="$ctrl.onFileSelect($file)" ng-model="$file" name="file" ngf-accept="'image/*'") 
+          div(flex)
+            md-progress-linear(ng-show="$ctrl.determinateValue" md-mode="determinate" ng-value="$ctrl.determinateValue")
+        md-content#ListContent
+          md-list#dialogImagesList(flex)
+            md-list-item.md-2-line(ng-animate='animate' ng-repeat='image in $ctrl.listImages', layout="row", ng-click="answer($index)")
+              img(ng-src='https://s3-sa-east-1.amazonaws.com/doebem/{{image}}' style="max-width:100px;")
+              div.md-list-item-text(layout="column" alig)
+                h3 {{image}}
+              md-divider.md-inset(ng-if="!$last")
+      md-dialog-actions(layout="row")
+        span(flex)
+        md-button(ng-click="cancel()") Cancel
+script(type="text/ng-template" id="save.tmpl.pug")
+  md-dialog(aria-label="save")
+    form(ng-cloak)
+      md-toolbar
+        div.md-toolbar-tools
+          h2 Cadastro Salvo!
+          span(flex)
+          md-button.md-icon-button(ng-click="cancel()") x
+      md-dialog-content
+        h2 Cadastro Salvo
+      md-dialog-actions(layout="row")
+        span(flex)
+        md-button(ng-click="cancel()") ok        

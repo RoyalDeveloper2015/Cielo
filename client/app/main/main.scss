@@ -1,0 +1,254 @@
+div#main {
+
+  div#pageHeader {
+    background-image: url('/assets/images/main/main.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    min-height: 80vh;
+    background-position: top center;
+    h2 {
+      color: white;
+      font-size: 70px;
+    }
+
+    @media screen and (max-width: 768px) {
+      min-height: 27vh;
+    }
+  }
+
+  div#mainPage {
+    .sectionHeading {
+      font-size: 50px;
+      font-family: 'Oswald';
+      margin-bottom: 15px;
+      padding-top: 20px;
+    }
+
+    div#comoFunciona {
+      text-align: center;
+      height: 100%;
+      width: 100%;
+      display: block;
+      padding-bottom: 30px;
+      background-color: white;
+
+      p#comoFunciona {
+        padding-top: 10px;
+        margin-bottom: 0px;
+      }
+
+      p {
+        margin-bottom: 0px;
+      }
+
+      md-list {
+        padding-top: 60px;
+        margin-right: 30px;
+        margin-left: 30px;
+        
+        md-list-item {
+          width: 370px !important;
+          
+          h2 {
+            font-family: 'Oswald';
+          }
+
+          p {
+            width: 370px !important;
+            font-family: 'Open Sans Condensed';
+          }
+
+          span {
+            i#icon {
+              color: white;
+            }
+          }
+        }
+      }
+    }
+    
+    div#causas {
+      text-align: center;
+      height: 100%;
+      width: 100%;
+      padding-bottom: 30px;
+      background-color: #eeeeee;
+      display: block;
+
+      md-card-title {
+        height: 130px;
+      }
+
+      h4.listItem {
+        margin-top: 0px !important;
+        margin-bottom: 15px !important;
+        font-weight: 400px !important;        
+      }
+
+      a {
+        height: 435.5px !important;
+      }
+
+    }
+
+    div#ongs {
+
+      text-align: center;
+      height: 100%;
+      width: 100%;
+      display: block;
+
+
+      md-card-content {
+        padding: 0 16px 16px 16px;
+      }
+
+      img.md-card-image {
+        width: 300px; 
+        height: 300px;
+        padding: 7px 7px 7px 7px !important;
+      }
+
+      .img__wrap {
+        position: relative;
+        height: 300px;
+        width: 300px;
+      }
+
+      .img__description_layer {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: gray;
+        color: #fff;
+        visibility: hidden;
+        opacity: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        /* transition effect. not necessary */
+        transition: opacity .2s, visibility .2s;
+      }
+
+      .img__wrap:hover .img__description_layer {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .img__description {
+        transition: .2s;
+        transform: translateY(1em);
+        width: 270px;
+      }
+
+      .img__wrap:hover .img__description {
+        transform: translateY(0);
+        width: 270px;
+      }
+
+      button {
+        background-color:  rgb(63,81,181);
+        color: white;
+        border-color: rgb(63,81,181) !important;
+        border-style: solid;
+        border-width: 1px;
+        margin-left: 0px;
+        font-size: 20px;
+        font-family: 'Oswald';
+      }
+
+      button:hover {
+        background-color: white !important;
+        color: rgb(63,81,181) !important;
+        border-color: rgb(63,81,181) !important;
+        border-style: solid;
+        border-width: 1px;
+        font-size: 20px;
+      }
+
+      @media screen and  (min-width: 768px) {
+
+        h3 {
+          font-weight: 400;
+        }
+      }
+
+      @media (min-width: 960px) {
+
+        md-card {
+          width: 300px;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+
+        md-list-item {
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+
+        md-card {
+            width: 300px ;
+            display: block;
+            text-align: center;
+            margin: 0 0 0 0;
+        }
+
+        h3 {
+          font-size: 16px;
+        }
+
+        .img__wrap:hover .img__description_layer {
+          visibility: hidden;
+        }
+      }
+    }
+
+    div#metodologia {
+      height: 100%;
+      width: 100%;
+      background-color: white;      
+
+      @include respond-to(screen-sm) {
+        padding: 40px;
+        text-align: center;
+      }
+
+      a {
+        color: black;
+      }
+
+      h3#metodologia {
+        margin-bottom: 50px;
+      }
+
+      div#subPage {
+        height: 100%;
+        width: 100%;
+        
+        div#sobre {
+          color: white;
+          background-image: url("/assets/images/sobre/sobre.jpg");
+          background-repeat: no-repeat;
+          background-size: cover;
+          width: 100%;
+          height: 100%; 
+        }
+
+        div a:hover {
+            color: white;
+        }
+
+        div#blog {
+          width: 100%;
+          height: 100%;
+        }
+      }  
+    }
+  }
+}
